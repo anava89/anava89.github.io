@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Open in Mail</title>
+<style>body{font:17px -apple-system,system-ui,sans-serif;margin:40px 24px;color:#222}a{color:#0a63c9}</style>
+</head>
+<body>
+<p id="msg">Opening Mail…</p>
+<script>
+// Opens an email in Apple Mail from a link like https://anava89.github.io/m/#<Message-ID>
+// The Message-ID sits after "#", so it is never sent to GitHub's servers.
+(function () {
+  var id = location.hash.slice(1);
+  var msg = document.getElementById('msg');
+  if (!/^[A-Za-z0-9.@_+=$%~\-]{3,300}$/.test(id)) {
+    msg.textContent = 'This link has no valid message ID.';
+    return;
+  }
+  var url = 'message:%3C' + id + '%3E';
+  var a = document.createElement('a');
+  a.href = url;
+  a.textContent = 'Open the email in Mail';
+  msg.textContent = 'If Mail did not open, tap: ';
+  msg.appendChild(a);
+  location.href = url;
+})();
+</script>
+</body>
+</html>
